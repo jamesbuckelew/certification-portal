@@ -1,0 +1,89 @@
+<template>
+    <!-- Cert progress bar - WOSB if:true={certTypeWosb}-->
+<div class="slds-var-p-*_small">
+<lightning-card label="Progress">
+    <div class="slds-m-around_medium" >
+        <lightning-progress-indicator current-step={currentStep} type="path" variant="base">
+            <lightning-progress-step label="Welcome Call" value="Welcome Call"></lightning-progress-step>
+            <lightning-progress-step label="Documents Requested" value="Documents Requested"></lightning-progress-step>
+            <lightning-progress-step label="Document Review" value="Document Review"></lightning-progress-step>
+            <lightning-progress-step label="Application Submitted" value="Application Submitted"></lightning-progress-step>
+            <lightning-progress-step label="Complete" value="Complete"></lightning-progress-step>
+        </lightning-progress-indicator>
+    </div>
+</lightning-card>
+</div>
+<div>{currentStep}<br></div>
+
+<div class="slds-var-p-*_small">
+    <lightning-card title="File Upload" icon-name="utility:upload" >
+        <!-- Upload Cert Doc Here -->
+        <div style="justify-content: center; display: flex;">
+            <lightning-file-upload
+                name = 'fileupload'
+                accept={acceptedFormats}
+                record-id={recordId}
+                onuploadfinished={handleUploadFinished}
+                multiple>
+            </lightning-file-upload>
+        </div>
+    </lightning-card>
+</div> 
+    
+ <div><br></div>
+
+<div class="slds-var-p-*_small">
+<lightning-card title="Required Document List" icon-name="standard:related_list" >
+    <!-- Required Document Text box -->
+    <div class="slds-m-around_medium" >
+        <lightning-formatted-rich-text value={requiredDocs}></lightning-formatted-rich-text>
+    </div>
+</lightning-card>
+</div>   
+
+<div><br></div>
+
+<div class="slds-var-p-*_small">
+    <lightning-card title="File Upload" icon-name="utility:upload" >
+        <!-- Upload Cert Doc Here -->
+        <div style="justify-content: center; display: flex;">
+            <lightning-file-upload
+                name = 'fileupload'
+                accept={acceptedFormats}
+                record-id={recordId}
+                onuploadfinished={handleUploadFinished}
+                multiple>
+            </lightning-file-upload>
+        </div>
+    </lightning-card>
+</div> 
+    
+ <div><br></div>
+
+<div class="slds-var-p-*_small">
+<lightning-card title="Uploaded Document Comments" icon-name="standard:task" >
+    <!-- What has been uploaded, place here -->
+    <div class="slds-m-around_medium" >
+        <lightning-formatted-rich-text value={uploadList}></lightning-formatted-rich-text>
+    </div>
+</lightning-card>
+</div>
+
+<div><br></div>
+
+<div class="slds-var-p-*_small">
+    <lightning-card title="Related Files of the record" icon-name="standard:folder">
+        <div style="width: auto;"> {getDocs}
+                    <lightning-datatable
+                        data={data}
+                        show-row-number-column
+                        row-number-offset={rowOffset}
+                        hide-checkbox-column
+                        columns={columns}
+                        key-field="id" >
+                    </lightning-datatable>
+        </div>
+    </lightning-card>
+</div>
+
+</template>
